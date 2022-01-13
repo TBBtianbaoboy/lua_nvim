@@ -283,4 +283,13 @@ function config.indent_blankline()
     vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
 end
 
+function config.gruvbox()
+    vim.g.gruvbox_contrast_dark = 'hard'
+    vim.cmd [[colorscheme gruvbox]]
+    vim.cmd [[highlight link Operator GruvboxRed]]
+    vim.cmd [[highlight link CocExplorerFileDiagnosticWarning None]]
+    vim.cmd [[highlight link CocExplorerFileDiagnosticError None]]
+    vim.cmd [[highlight link TelescopeSelection SignColumn]]
+end
+
 return config

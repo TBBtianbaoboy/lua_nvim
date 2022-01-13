@@ -11,6 +11,12 @@ ui["catppuccin/nvim"] = {
     as = "catppuccin",
     config = conf.catppuccin
 }
+-- gruvbox theme
+ui["morhetz/gruvbox"] = {
+    opt = false,
+    as = "morhetz",
+    config = conf.gruvbox
+}
 -- Minimal, fast but customizable line
 ui["hoob3rt/lualine.nvim"] = {
     opt = true,

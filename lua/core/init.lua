@@ -260,13 +260,15 @@ local load_core = function()
     dashboard_config()
     -- clipboard_settings()
 
+vim.g.gruvbox_contrast_dark = 'hard'
+vim.cmd [[colorscheme gruvbox]]
     require("core.options")
     require("core.mapping")
     require("keymap")
     require("core.event")
     pack.load_compile()
 
-    vim.cmd [[colorscheme catppuccin]]
+    -- vim.cmd [[colorscheme morhetz]]
 end
 
 load_core()
