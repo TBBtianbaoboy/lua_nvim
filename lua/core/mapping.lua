@@ -5,36 +5,33 @@ local map_cmd = bind.map_cmd
 -- default map
 local def_map = {
     -- Vim map
-    ["n|<C-x>k"] = map_cr("bdelete"):with_noremap():with_silent(),
     ["n|Y"] = map_cmd("y$"),
     ["n|D"] = map_cmd("d$"),
     ["n|H"] = map_cmd("^"),
     ["n|L"] = map_cmd("g_"),
     ["n|n"] = map_cmd("nzzzv"):with_noremap(),
     ["n|N"] = map_cmd("Nzzzv"):with_noremap(),
-    ["n|J"] = map_cmd("mzJ`z"):with_noremap(),
+    ["n|J"] = map_cmd("mzJ`z"):with_noremap(), -- 将下一行移动到当前行尾
     -- Windows Split
-    ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
+    ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),-- C 表示Ctrl键
     ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
     ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
     ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
-    ["n|<A-;>"] = map_cr("resize -2"):with_silent(),
+    ["n|<A-;>"] = map_cr("resize -2"):with_silent(),-- A 表示Alt键
     ["n|<A-'>"] = map_cr("resize +2"):with_silent(),
     ["n|<leader>e"] = map_cmd(":wq<CR>"),
     ["n|<leader>q"] = map_cmd(":q!<CR>"),
     ["n|<leader>w"] = map_cmd(":w<CR>"),
-    ["n|<A-q>"] = map_cmd(":Bwipeout<CR>"),
     -- 开启英文单词正确性校验
     ["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
-    -- Insert
-    ["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap(),
-    ["i|<C-b>"] = map_cmd("<Left>"):with_noremap(),
-    ["i|<C-a>"] = map_cmd("<Esc>^i"):with_noremap(),
-    ["i|<C-e>"] = map_cmd("<End>"):with_noremap(),
-    ["i|<C-f>"] = map_cmd("<Right>"):with_noremap(),
-    ["i|<C-b>"] = map_cmd("<Left>"):with_noremap(),
-    ["i|<C-d>"] = map_cmd("<Del>"):with_noremap(),
-    ["i|<C-k>"] = map_cmd("()<Esc>i"):with_noremap(),
+    -- 插入模式的快捷键---------------------------------------------------------------------------ok
+    ["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap(), -- 删除当行光标前内容
+    ["i|<C-b>"] = map_cmd("<Left>"):with_noremap(), -- 光标向行首移动
+    ["i|<C-a>"] = map_cmd("<Esc>^i"):with_noremap(), -- 光标跳转到行首
+    ["i|<C-e>"] = map_cmd("<End>"):with_noremap(), -- 光标跳转到行尾
+    ["i|<C-f>"] = map_cmd("<Right>"):with_noremap(), -- 光标向行尾移动
+    ["i|<C-d>"] = map_cmd("<Del>"):with_noremap(), -- 光标向后删除-- 另外<C-h> 是光标向前删除
+    ["i|<C-k>"] = map_cmd("()<Esc>i"):with_noremap(), -- 增加()
     -- command line
     ["c|<C-b>"] = map_cmd("<Left>"):with_noremap(),
     ["c|<C-f>"] = map_cmd("<Right>"):with_noremap(),
@@ -43,8 +40,8 @@ local def_map = {
     ["c|<C-d>"] = map_cmd("<Del>"):with_noremap(),
     ["c|<C-h>"] = map_cmd("<BS>"):with_noremap(),
     ["c|<C-p>"] = map_cmd("<Up>"):with_noremap(),
-    ["c|<C-n>"] = map_cmd("<Down>"):with_noremap(),
     ["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap(),
+    ["c|<C-n>"] = map_cmd("<Down>"):with_noremap(),
     ["c|w!!"] = map_cmd(
         "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!"),
     -- Visual

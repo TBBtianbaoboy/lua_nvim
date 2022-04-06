@@ -28,6 +28,7 @@ function config.cmp()
 
     local cmp = require("cmp")
     cmp.setup {
+        -- label 1
         sorting = {
             comparators = {
                 cmp.config.compare.offset, cmp.config.compare.exact,
@@ -124,17 +125,17 @@ function config.cmp()
                 end
             end
         },
+        -- label 2
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
             end
         },
-        -- You should specify your *installed* sources.
+        -- label 3
         sources = {
             {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "luasnip"},
             {name = "path"}, {name = "spell"}, {name = "tmux"},
-            {name = "orgmode"}, {name = "buffer"}, {name = "latex_symbols"}
-            -- {name = 'cmp_tabnine'}
+            {name = "orgmode"}, {name = "buffer"}, {name = "latex_symbols"},
         }
     }
 end
@@ -146,11 +147,6 @@ function config.luasnip()
     }
     require("luasnip/loaders/from_vscode").load()
 end
-
--- function config.tabnine()
---     local tabnine = require('cmp_tabnine.config')
---     tabnine:setup({max_line = 1000, max_num_results = 20, sort = true})
--- end
 
 function config.autopairs()
     require("nvim-autopairs").setup {}

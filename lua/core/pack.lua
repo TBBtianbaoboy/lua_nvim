@@ -1,3 +1,4 @@
+-- 加载插件
 local fn, uv, api = vim.fn, vim.loop, vim.api
 local vim_path = require("core.global").vim_path
 local data_dir = require("core.global").data_dir

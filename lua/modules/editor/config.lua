@@ -57,7 +57,7 @@ function config.vim_cursorwod()
     vim.api.nvim_command("augroup user_plugin_cursorword")
     vim.api.nvim_command("autocmd!")
     vim.api.nvim_command(
-        "autocmd FileType NvimTree,lspsagafinder,dashboard let b:cursorword = 0")
+        "autocmd FileType NvimTree,dashboard let b:cursorword = 0")
     vim.api.nvim_command(
         "autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
     vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
@@ -72,6 +72,7 @@ function config.nvim_treesitter()
     require"nvim-treesitter.configs".setup {
         ensure_installed = "maintained",
         highlight = {enable = true, disable = {"vim"}},
+        -- label 1
         textobjects = {
             select = {
                 enable = true,
@@ -103,14 +104,19 @@ function config.nvim_treesitter()
                 }
             }
         },
+        -- label 2
         rainbow = {
+            -- colors={
+            --     "#123456",
+            -- },
             enable = true,
             extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
             max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
         },
+        -- label 3
         context_commentstring = {enable = true, enable_autocmd = false},
+        -- label 4
         matchup = {enable = true},
-        context = {enable = true, throttle = true}
     }
 end
 
@@ -144,7 +150,7 @@ function config.autotag()
     require("nvim-ts-autotag").setup({
         filetypes = {
             "html", "xml", "javascript", "typescriptreact", "javascriptreact",
-            "vue"
+            "vue",
         }
     })
 end
@@ -193,7 +199,7 @@ function config.toggleterm()
                 return vim.o.columns * 0.40
             end
         end,
-        open_mapping = [[<c-\>]],
+        open_mapping = [[<F12>]],
         hide_numbers = true, -- hide the number column in toggleterm buffers
         shade_filetypes = {},
         shade_terminals = false,
@@ -201,7 +207,7 @@ function config.toggleterm()
         start_in_insert = true,
         insert_mappings = true, -- whether or not the open mapping applies in insert mode
         persist_size = true,
-        direction = "horizontal",
+        direction = "float",
         close_on_exit = true, -- close the terminal window when the process exits
         shell = vim.o.shell -- change the default shell
     }
@@ -334,22 +340,22 @@ function config.dap()
     }
 end
 
-function config.specs()
-    require('specs').setup {
-        show_jumps = true,
-        min_jump = 10,
-        popup = {
-            delay_ms = 0, -- delay before popup displays
-            inc_ms = 10, -- time increments used for fade/resize effects
-            blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-            width = 10,
-            winhl = "PMenu",
-            fader = require('specs').pulse_fader,
-            resizer = require('specs').shrink_resizer
-        },
-        ignore_filetypes = {},
-        ignore_buftypes = {nofile = true}
-    }
-end
+-- function config.specs()
+--     require('specs').setup {
+--         show_jumps = true,
+--         min_jump = 10,
+--         popup = {
+--             delay_ms = 0, -- delay before popup displays
+--             inc_ms = 10, -- time increments used for fade/resize effects
+--             blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+--             width = 10,
+--             winhl = "PMenu",
+--             fader = require('specs').pulse_fader,
+--             resizer = require('specs').shrink_resizer
+--         },
+--         ignore_filetypes = {},
+--         ignore_buftypes = {nofile = true}
+--     }
+-- end
 
 return config

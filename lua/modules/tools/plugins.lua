@@ -16,15 +16,15 @@ tools["nvim-telescope/telescope.nvim"] = {
         {"nvim-lua/popup.nvim", opt = true}
     }
 }
-tools["thinca/vim-quickrun"] = {opt = true, cmd = {"QuickRun", "Q"}}
-tools["michaelb/sniprun"] = {
-    opt = true,
-    run = "bash ./install.sh",
-    cmd = {"SnipRun", "'<,'>SnipRun"}
-}
--- Profiling starup time quickly
+
+-- @func: 显示nvim启动的时间
+-- @keymap: :StartupTime
+-- @status: true
 tools["dstein64/vim-startuptime"] = {opt = true, cmd = "StartupTime"}
--- More useful wild menu
+
+-- @func: 命令行模糊搜索以及自动补充
+-- @keymap: / | : | ?
+-- @status: false 还不够智能
 tools["gelguy/wilder.nvim"] = {
     event = "CmdlineEnter",
     config = conf.wilder,

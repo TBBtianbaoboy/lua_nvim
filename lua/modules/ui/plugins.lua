@@ -1,33 +1,45 @@
 local ui = {}
 local conf = require("modules.ui.config")
 
--- Provide icons
+-- @func: 提供icon
+-- @keymap: nil
+-- @status: true
 ui["kyazdani42/nvim-web-devicons"] = {opt = false}
--- My light/dark theme
+
+-- @func: vim主题
+-- @keymap: nil
+-- @status: true
 ui["sainnhe/edge"] = {opt = false, config = conf.edge}
--- A low contrast dark theme
-ui["catppuccin/nvim"] = {
-    opt = false,
-    as = "catppuccin",
-    config = conf.catppuccin
-}
--- gruvbox theme
+
+-- @func: vim主题
+-- @keymap: nil
+-- @status: true
 ui["morhetz/gruvbox"] = {
     opt = false,
     as = "morhetz",
     config = conf.gruvbox
 }
--- Minimal, fast but customizable line
+-- @func: 下方状态栏
+-- @keymap: nil
+-- @status: true
 ui["hoob3rt/lualine.nvim"] = {
     opt = true,
     after = "lualine-lsp-progress",
     config = conf.lualine
 }
--- Show lsp progress in lualine
+-- @func: lualine.nvim的依赖项
+-- @keymap: nil
+-- @status: true
 ui["arkav/lualine-lsp-progress"] = {opt = true, after = "nvim-gps"}
--- Dashboard for Neovim
+
+-- @func: dashboard面板
+-- @keymap: nil
+-- @status: true
 ui["glepnir/dashboard-nvim"] = {opt = true, event = "BufWinEnter"}
--- Replacement of Nerdtree
+
+-- @func: 左侧目录面板
+-- @keymap: <C-\>
+-- @status: true
 ui["kyazdani42/nvim-tree.lua"] = {
     opt = true,
     cmd = {"NvimTreeToggle", "NvimTreeOpen"},
@@ -40,18 +52,22 @@ ui["lewis6991/gitsigns.nvim"] = {
     config = conf.gitsigns,
     requires = {"nvim-lua/plenary.nvim", opt = true}
 }
--- Show indent with different level
+-- @func: 显示缩进对齐线
+-- @keymap: nil
+-- @status: true
 ui["lukas-reineke/indent-blankline.nvim"] = {
     opt = true,
     event = "BufRead",
     config = conf.indent_blankline
 }
--- Tab and buffer management
+
+-- @func: 显示上标缓冲区
+-- @keymap: <leader>[0-9] | gb | gB
+-- @status: true
 ui["akinsho/nvim-bufferline.lua"] = {
     opt = true,
     event = "BufRead",
     config = conf.nvim_bufferline
 }
-ui["dstein64/nvim-scrollview"] = {opt = true, event = "BufRead"}
 
 return ui

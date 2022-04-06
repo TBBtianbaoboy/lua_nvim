@@ -6,9 +6,12 @@ local map_cmd = bind.map_cmd
 require("keymap.config")
 
 local plug_map = {
-    -- Format
-    ["n|<C-A-l>"] = map_cu("FormatWrite"):with_noremap():with_silent(),
-    -- Bufferline
+    -- 注释快捷键<C-/>
+    ["n|<C-_>"] = map_cr("CommentToggle"):with_noremap():with_silent(),
+    ["v|<C-_>"] = map_cr("CommentToggle"):with_noremap():with_silent(),
+    -- 代码格式化快捷键
+    ["n|<leader>af"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent(),
+    -- 缓冲线选择/删除快捷键
     ["n|<leader>1"] = map_cr("BufferLineGoToBuffer 1"):with_noremap():with_silent(),
     ["n|<leader>2"] = map_cr("BufferLineGoToBuffer 2"):with_noremap():with_silent(),
     ["n|<leader>3"] = map_cr("BufferLineGoToBuffer 3"):with_noremap():with_silent(),
@@ -18,49 +21,30 @@ local plug_map = {
     ["n|<leader>7"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent(),
     ["n|<leader>8"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent(),
     ["n|<leader>9"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent(),
-    -- Packer
-    ["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_noremap()
-        :with_nowait(),
-    ["n|<leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap()
-        :with_nowait(),
-    ["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap()
-        :with_nowait(),
-    ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap()
-        :with_nowait(),
+    ["n|gb"] = map_cu("BufferLinePick"):with_noremap():with_silent(),
+    ["n|gB"] = map_cu("BufferLinePickClose"):with_noremap():with_silent(),
+    -- 插件包管理快捷键(废弃，需要时直接跑命令即可)
+    -- ["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_noremap()
+    --     :with_nowait(),
+    -- ["n|<leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap()
+    --     :with_nowait(),
+    -- ["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap()
+    --     :with_nowait(),
+    -- ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap()
+    --     :with_nowait(),
     -- Lsp mapp work when insertenter and lsp start
     ["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent()
         :with_nowait(),
     ["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent()
         :with_nowait(),
-    ["n|g["] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap()
-        :with_silent(),
-    ["n|g]"] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap()
-        :with_silent(),
-    ["n|<leader>sh"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
-    ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
-    ["n|<C-Up>"] = map_cr(
-        "lua require('lspsaga.action').smart_scroll_with_saga(-1)"):with_noremap()
-        :with_silent(),
-    ["n|<C-Down>"] = map_cr(
-        "lua require('lspsaga.action').smart_scroll_with_saga(1)"):with_noremap()
-        :with_silent(),
-    ["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap()
-        :with_silent(),
-    ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
-        :with_silent(),
+
+    ["n|K"] = map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent(),
     ["n|gy"] = map_cr("lua vim.lsp.buf.type_definition()"):with_noremap():with_silent(),
-    ["n|gd"] = map_cr("Lspsaga preview_definition"):with_noremap():with_silent(),
     ["n|gi"] = map_cr("lua vim.lsp.buf.implementation()"):with_noremap():with_silent(),
-    ["n|<leader>rn"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
-    ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
+    ["n|<leader>rn"] = map_cr("lua vim.lsp.buf.rename()"):with_noremap():with_silent(),
+    ["n|gd"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
         :with_silent(),
     ["n|gr"] = map_cr("lua vim.lsp.buf.references()"):with_noremap()
-        :with_silent(),
-    ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap()
-        :with_silent(),
-    ["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap()
-        :with_silent(),
-    ["t|<A-S-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").exit()]]):with_noremap()
         :with_silent(),
     ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap()
         :with_silent(),
@@ -68,9 +52,7 @@ local plug_map = {
     ["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
     ["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
     -- Plugin nvim-tree
-    ["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
-    ["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
-    ["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
+    ["n|<C-\\>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
     -- Plugin Telescope
     ["n|<Leader>fh"] = map_cu("DashboardFindHistory"):with_noremap()
         :with_silent(),
@@ -89,11 +71,9 @@ local plug_map = {
     ["n|F"] = map_cmd("v:lua.enhance_ft_move('F')"):with_expr(),
     ["n|t"] = map_cmd("v:lua.enhance_ft_move('t')"):with_expr(),
     ["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
-    ["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
     -- Plugin Hop
     ["n|<leader>h"] = map_cu("HopWord"):with_noremap(),
     ["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
-    ["n|<leader>k"] = map_cu("HopLine"):with_noremap(),
     ["n|<leader>c1"] = map_cu("HopChar1"):with_noremap(),
     ["n|<leader>c2"] = map_cu("HopChar2"):with_noremap(),
     -- Plugin EasyAlign
@@ -101,18 +81,13 @@ local plug_map = {
     ["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
     -- Plugin SymbolsOutline
     ["n|<leader>so"] = map_cr("SymbolsOutline"):with_noremap():with_silent(),
-    -- Plugin split-term
-    ["n|<F5>"] = map_cr("VTerm"):with_noremap():with_silent(),
-    ["n|<C-w>t"] = map_cr("VTerm"):with_noremap():with_silent(),
     -- Plugin MarkdownPreview
-    ["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),
+    ["n|<F5>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),
     -- Plugin auto_session
     ["n|<leader>ss"] = map_cu("SaveSession"):with_noremap():with_silent(),
     ["n|<leader>sr"] = map_cu("RestoreSession"):with_noremap():with_silent(),
     ["n|<leader>sd"] = map_cu("DeleteSession"):with_noremap():with_silent(),
-    -- Plugin SnipRun
-    ["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent(),
-    -- Plugin dap
+    -- Plugin dap (unknow how to use)
     ["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap()
         :with_silent(),
     ["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap()
@@ -144,7 +119,7 @@ local plug_map = {
         :with_silent(),
     ["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap()
         :with_silent(),
-    ["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent()
+    ["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
 }
 
 bind.nvim_load_mapping(plug_map)

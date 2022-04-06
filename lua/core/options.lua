@@ -1,3 +1,4 @@
+-- 配置vim属性的配置文件
 local global = require("core.global")
 
 local function bind_option(options)
@@ -72,8 +73,8 @@ local function load_options()
         sidescrolloff = 5,
         foldlevelstart = 99,
         ruler = true,
-        cursorline = true,
-        cursorcolumn = true,
+        cursorline = true, --高亮显示当前行
+        cursorcolumn = false, --高亮显示当前列
         list = true,
         showtabline = 2,
         winwidth = 30,
