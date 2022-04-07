@@ -60,6 +60,24 @@ function config.sniprun()
     })
 end
 
+-- function config.formatter()
+--     require("formatter").setup{
+--         filetype = {
+--             -- lua格式化程序
+--             lua = {
+--                 -- luafmt
+--                 function()
+--                     return {
+--                         exe = "luafmt",
+--                         args = {"--indent-count", 2, "--stdin"},
+--                         stdin = true
+--                     }
+--                 end
+--             },
+--         }
+--     }
+-- end
+
 function config.wilder()
     local wilder = require('wilder')
     wilder.setup({modes = {':', '/', '?'}})
