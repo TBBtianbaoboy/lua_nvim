@@ -10,7 +10,8 @@ local plug_map = {
     ["n|<C-_>"] = map_cr("CommentToggle"):with_noremap():with_silent(),
     ["v|<C-_>"] = map_cr("CommentToggle"):with_noremap():with_silent(),
     -- 代码格式化快捷键
-    ["n|<leader>af"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent(),
+    -- ["n|<leader>af"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent(),
+    -- ["n|<leader>af"] = map_cmd("ggVG="):with_noremap():with_silent(),
     -- 缓冲线选择/删除快捷键
     ["n|<leader>1"] = map_cr("BufferLineGoToBuffer 1"):with_noremap():with_silent(),
     ["n|<leader>2"] = map_cr("BufferLineGoToBuffer 2"):with_noremap():with_silent(),

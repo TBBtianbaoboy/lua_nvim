@@ -22,6 +22,17 @@ tools["nvim-telescope/telescope.nvim"] = {
 -- @status: true
 tools["dstein64/vim-startuptime"] = {opt = true, cmd = "StartupTime"}
 
+-- @func: 代码格式化
+-- @keymap: :<leader>af
+-- @status: false
+tools["mhartington/formatter.nvim"] = {
+    opt = true,
+    cmd = "Format",
+    config = function ()
+        require('formatter').setup{}
+    end
+}
+
 -- @func: 命令行模糊搜索以及自动补充
 -- @keymap: / | : | ?
 -- @status: false 还不够智能
