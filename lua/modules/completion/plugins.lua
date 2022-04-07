@@ -19,9 +19,11 @@ completion["williamboman/nvim-lsp-installer"] = {
 -- @keymap: : nil
 -- @status: false
 -- completion["creativenull/efmls-configs-nvim"] = {
---     opt = false,
+--     opt = true,
+--     event = {"BufWritePre"},
 --     requires = "neovim/nvim-lspconfig"
 -- }
+
 -- @func: 代码参数提示
 -- @keymap: : nil
 -- @status: true

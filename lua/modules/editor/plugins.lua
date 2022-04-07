@@ -1,5 +1,7 @@
 -- @All
 -- 与编辑相关的插件配置
+-- opt 设置成false表示启动nvim时会自动加载
+-- cmd 如果有设置就需要event加载了
 -- LearnMap
 
 local editor = {}
@@ -14,9 +16,9 @@ editor["junegunn/vim-easy-align"] = {opt = true, cmd = "EasyAlign"}
 -- @keymap: nil
 -- @status: true
 editor["itchyny/vim-cursorword"] = {
-    opt    = true,
-    event  = {"BufReadPre", "BufNewFile"},
-    config = conf.vim_cursorwod
+    opt = true,
+    event = {"BufReadPre", "BufNewFile"},
+    config = conf.vim_cursorwod,
 }
 
 -- @func: 注释(结合使用了nvim_treesitter的子模块)
@@ -182,6 +184,89 @@ editor["rmagatti/auto-session"] = {
     cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
     config = conf.auto_session
 }
+
+-- @func: 禅模式
+-- @keymap: nil
+-- @status: true
+editor["folke/zen-mode.nvim"] = {
+    opt = true,
+    event = "BufRead",
+    cmd = {"ZenMode"},
+    config = conf.zen_mode
+}
+
+-- @func: 可视化移动
+-- @keymap: v <A-e>
+-- @status: true
+editor["chaoren/vim-wordmotion"] = {
+    opt = false,
+    config = conf.vim_wordmotion
+}
+
+-- @func: 变量格式转换
+-- @keymap: crc | cru | crs | crm | cr. | cr- | cr<space> | crt
+-- @status: true
+editor["tpope/vim-abolish"] = {
+    opt = false,
+}
+
+-- @func: v扩展
+-- @keymap: v | V
+-- @status: false(无效)
+editor["terryma/vim-expand-region"] = {
+    opt = false,
+    config = conf.vim_expand_region
+}
+
+-- @func: 参数自动分行
+-- @keymap: gJ | gS
+-- @status: true
+editor["AndrewRadev/splitjoin.vim"] = {
+    opt = false,
+}
+
+-- @func: 行数跳转预览
+-- @keymap: :
+-- @status: true
+editor["nacro90/numb.nvim"] = {
+    opt = true,
+    event = {"CmdlineEnter"},
+    config = conf.numb
+}
+
+-- @func: 在保存文件时，自动去除每一行之后的空格
+-- @keymap: nil
+-- @status: true
+editor["McAuleyPenney/tidy.nvim"] = {
+    opt = true,
+    event = {"BufWritePre"},
+}
+
+-- @func: 给变量重新命名，lsp rename的扩展
+-- @keymap: <leader>rn
+-- @status: true
+editor["filipdutescu/renamer.nvim"] = {
+    opt = true,
+    event = "BufRead",
+    branch = "master",
+    requires = {
+        {"nvim-lua/plenary.nvim"},
+    },
+    config = conf.renamer
+}
+
+-- @func: 正则表达式解析
+-- @keymap: <leader>rn
+-- @status: true
+-- editor["bennypowers/nvim-regexplainer"] = {
+--     opt = true,
+--     event = "BufRead",
+--     requires = {
+--         {"nvim-treesitter/nvim-treesitter"},
+--         {"MunifTanjim/nui.nvim"},
+--     },
+--     config = conf.nvim_regexplainer
+-- }
 
 -- @func: 未知
 -- @keymap: unknow

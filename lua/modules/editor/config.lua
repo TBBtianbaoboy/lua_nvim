@@ -189,6 +189,118 @@ function config.auto_session()
     require("auto-session").setup(opts)
 end
 
+function config.zen_mode()
+    require("zen-mode").setup {}
+end
+
+function config.vim_wordmotion()
+    vim.cmd [[
+    let g:wordmotion_mappings = {
+        \ 'w' : '<M-w>',
+        \ 'b' : '<M-b>',
+        \ 'e' : '<M-e>',
+        \ 'ge' : 'g<M-e>',
+        \ 'aw' : 'a<M-w>',
+        \ 'iw' : 'i<M-w>',
+        \ '<C-R><C-W>' : '<C-R><M-w>'
+        \ }
+        ]]
+end
+
+function config.vim_expand_region()
+    vim.cmd [[
+    let g:expand_region_text_objects = {
+        \ 'iw'  :0,
+        \ 'i"'  :0, 'a"'  :0,
+        \ 'i''' :0, 'a''' :0,
+        \ 'i`'  :0, 'a`'  :0,
+        \ 'i)'  :1, 'a)'  :1,
+        \ 'i]'  :1, 'a]'  :1,
+        \ 'i}'  :1, 'a}'  :1,
+        \ 'it'  :1, 'at'  :1,
+        \ }
+        ]]
+end
+
+function config.numb()
+    require('numb').setup{
+        show_numbers = true, -- Enable 'number' for the window while peeking
+        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+        number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+        centered_peeking = true, -- Peeked line will be centered relative to window
+    }
+end
+
+function config.renamer()
+    local mappings_utils = require('renamer.mappings.utils')
+    require('renamer').setup {
+        -- The popup title, shown if `border` is true
+        title = 'Aico Rename',
+        -- The padding around the popup content
+        padding = {
+            top = 0,
+            left = 0,
+            bottom = 0,
+            right = 0,
+        },
+        -- The minimum width of the popup
+        min_width = 15,
+        -- The maximum width of the popup
+        max_width = 45,
+        -- Whether or not to shown a border around the popup
+        border = true,
+        -- The characters which make up the border
+        border_chars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        -- Whether or not to highlight the current word references through LSP
+        show_refs = true,
+        -- Whether or not to add resulting changes to the quickfix list
+        with_qf_list = true,
+        -- Whether or not to enter the new name through the UI or Neovim's `input`
+        -- prompt
+        with_popup = true,
+        -- The keymaps available while in the `renamer` buffer. The example below
+        -- overrides the default values, but you can add others as well.
+        mappings = {
+            ['<c-a>'] = mappings_utils.set_cursor_to_start,
+            ['<c-e>'] = mappings_utils.set_cursor_to_end,
+            ['<c-u>'] = mappings_utils.clear_line,
+            ['<c-r>'] = mappings_utils.redo,
+        },
+        -- Custom handler to be run after successfully renaming the word. Receives
+        -- the LSP 'textDocument/rename' raw response as its parameter.
+        handler = nil,
+    }
+end
+
+-- function config.nvim_regexplainer()
+--     require'regexplainer'.setup {
+--         -- 'narrative'
+--         mode = 'narrative', -- TODO: 'ascii', 'graphical'
+--
+--         -- automatically show the explainer when the cursor enters a regexp
+--         auto = false,
+--
+--         -- Whether to log debug messages
+--         debug = false,
+--
+--         -- 'split', 'popup', 'pasteboard'
+--         display = 'popup',
+--
+--         mappings = {
+--             toggle = 'gR',
+--             -- examples, not defaults:
+--             -- show = 'gS',
+--             -- hide = 'gH',
+--             -- show_split = 'gP',
+--             -- show_popup = 'gU',
+--         },
+--
+--         narrative = {
+--             separator = '\n',
+--         },
+--     }
+-- end
+
 function config.toggleterm()
     require("toggleterm").setup {
         -- size can be a number or function which is passed the current terminal

@@ -61,14 +61,67 @@ function config.sniprun()
 end
 
 function config.wilder()
-    vim.cmd [[
-call wilder#setup({'modes': [':', '/', '?']})
-call wilder#set_option('use_python_remote_plugin', 0)
-
-call wilder#set_option('pipeline', [wilder#branch(wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),wilder#vim_search_pipeline(), [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})])])
-
-call wilder#set_option('renderer', wilder#renderer_mux({':': wilder#popupmenu_renderer({'highlighter': wilder#lua_fzy_highlighter(), 'left': [wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]}), '/': wilder#wildmenu_renderer({'highlighter': wilder#lua_fzy_highlighter()})}))
-]]
+    local wilder = require('wilder')
+    wilder.setup({modes = {':', '/', '?'}})
+    -- local highlighters = {
+    --     wilder.pcre2_highlighter(),
+    --     wilder.lua_fzy_highlighter(),
+    -- }
+    -- 禁止远程插件
+    wilder.set_option('use_python_remote_plugin', 0)
+    -- 模糊搜索
+    wilder.set_option('pipeline', {
+        wilder.branch(
+        wilder.cmdline_pipeline({
+            fuzzy = 1,
+            fuzzy_filter = wilder.lua_fzy_filter(),
+        }),
+        wilder.vim_search_pipeline({
+        })
+        )
+    })
+    -- 搜索框
+    wilder.set_option('renderer', wilder.renderer_mux({
+        [':'] = wilder.popupmenu_renderer({
+            highlighter = wilder.lua_fzy_highlighter(),
+            left = {
+                ' ',
+                wilder.popupmenu_devicons()
+            },
+            right = {
+                ' ',
+                wilder.popupmenu_scrollbar()
+            },
+        }),
+        ['/'] = wilder.wildmenu_renderer({
+            highlighter = wilder.lua_fzy_highlighter(),
+        }),
+    }))
+    -- 搜索框UI
+    -- wilder.set_option('renderer', wilder.popupmenu_renderer(
+    -- wilder.popupmenu_palette_theme({
+    --     -- 'single', 'double', 'rounded' or 'solid'
+    --     -- can also be a list of 8 characters, see :h wilder#popupmenu_palette_theme() for more details
+    --     border = 'rounded',
+    --     max_height = '75%',      -- max height of the palette
+    --     min_height = 0,          -- set to the same as 'max_height' for a fixed height window
+    --     prompt_position = 'top', -- 'top' or 'bottom' to set the location of the prompt
+    --     reverse = 0,             -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
+    --     highlighter = highlighters,
+    --     left = {
+    --         ' ',
+    --         wilder.popupmenu_devicons(),
+    --         wilder.popupmenu_buffer_flags({
+    --             flags = ' a + ',
+    --             icons = {['+'] = '', a = '', h = ''},
+    --         }),
+    --     },
+    --     right = {
+    --         ' ',
+    --         wilder.popupmenu_scrollbar(),
+    --     },
+    -- })
+    -- ))
 end
 
 return config

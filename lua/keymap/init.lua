@@ -6,6 +6,10 @@ local map_cmd = bind.map_cmd
 require("keymap.config")
 
 local plug_map = {
+    -- 可视化扩展选择
+    -- ["v|v"] = map_cr("CommentToggle"):with_noremap():with_silent(),
+    -- 禅模式
+    ["n|<F4>"] = map_cr("ZenMode"):with_noremap():with_silent(),
     -- 注释快捷键<C-/>
     ["n|<C-_>"] = map_cr("CommentToggle"):with_noremap():with_silent(),
     ["v|<C-_>"] = map_cr("CommentToggle"):with_noremap():with_silent(),
@@ -41,7 +45,8 @@ local plug_map = {
     ["n|K"] = map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent(),
     ["n|gy"] = map_cr("lua vim.lsp.buf.type_definition()"):with_noremap():with_silent(),
     ["n|gi"] = map_cr("lua vim.lsp.buf.implementation()"):with_noremap():with_silent(),
-    ["n|<leader>rn"] = map_cr("lua vim.lsp.buf.rename()"):with_noremap():with_silent(),
+    -- ["n|<leader>rn"] = map_cr("lua vim.lsp.buf.rename()"):with_noremap():with_silent(),
+    ["n|<leader>rn"] = map_cr("lua require('renamer').rename()"):with_noremap():with_silent(),
     ["n|gd"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
         :with_silent(),
     ["n|gr"] = map_cr("lua vim.lsp.buf.references()"):with_noremap()
