@@ -1,15 +1,15 @@
 local global = require "core.global"
 local vim = vim
 
--- Create cache dir and subs dir
+-- @Func: 创建一系列目录
 local createdir = function()
+    -- 声明存放数据的目录table
     local data_dir = {
         global.cache_dir .. "backup", global.cache_dir .. "session",
         global.cache_dir .. "swap", global.cache_dir .. "tags",
         global.cache_dir .. "undo"
     }
-    -- There only check once that If cache_dir exists
-    -- Then I don't want to check subs dir exists
+    -- 创建目录
     if vim.fn.isdirectory(global.cache_dir) == 0 then
         os.execute("mkdir -p " .. global.cache_dir)
         for _, v in pairs(data_dir) do
@@ -49,74 +49,40 @@ local leader_map = function()
     vim.api.nvim_set_keymap("x", " ", "", {noremap = true})
 end
 
--- https://github.com/neovide/neovide
--- after neovim can use,then do this
--- #download
--- https://github.com/neovide/neovide/releases/download/0.5.0/neovide
--- #resolve no *.so
--- https://userrepository.eu/shutter-encoder-15.7-1-x86_64.pkg.tar.zst
--- tar -I zstd -xvf xxxx.tar.zst
-local neovide_config = function()
-    -- vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font:h18]]
-    vim.cmd [[set guifont=Fira\ Code\ Medium\ Nerd\ Font\ Complete\ Mono:h18]]
-    vim.g.neovide_refresh_rate = 60
-    vim.g.neovide_cursor_vfx_mode = "railgun"
-    vim.g.neovide_no_idle = true
-    vim.g.neovide_fullscreen = true
-    vim.g.neovide_cursor_animation_length = 0.03
-    vim.g.neovide_cursor_trail_length = 0.05
-    vim.g.neovide_cursor_antialiasing = true
-    vim.g.neovide_cursor_vfx_opacity = 200.0
-    vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
-    vim.g.neovide_cursor_vfx_particle_speed = 20.0
-    vim.g.neovide_cursor_vfx_particle_density = 5.0
-    vim.g.neovide_transparency = 0.8
-end
+--: https://github.com/neovide/neovide
+--: after neovim can use,then do this
+--: #download
+--: https://github.com/neovide/neovide/releases/download/0.5.0/neovide
+--: #resolve no *.so
+--: https://userrepository.eu/shutter-encoder-15.7-1-x86_64.pkg.tar.zst
+--: tar -I zstd -xvf xxxx.tar.zst
+-- local neovide_config = function()
+--     -- vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font:h18]]
+--     vim.cmd [[set guifont=Fira\ Code\ Medium\ Nerd\ Font\ Complete\ Mono:h18]]
+--     vim.g.neovide_refresh_rate = 60
+--     vim.g.neovide_cursor_vfx_mode = "railgun"
+--     vim.g.neovide_no_idle = true
+--     vim.g.neovide_fullscreen = true
+--     vim.g.neovide_cursor_animation_length = 0.03
+--     vim.g.neovide_cursor_trail_length = 0.05
+--     vim.g.neovide_cursor_antialiasing = true
+--     vim.g.neovide_cursor_vfx_opacity = 200.0
+--     vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
+--     vim.g.neovide_cursor_vfx_particle_speed = 20.0
+--     vim.g.neovide_cursor_vfx_particle_density = 5.0
+--     vim.g.neovide_transparency = 0.8
+-- end
 
 local dashboard_config = function()
     vim.g.dashboard_footer_icon = "🐬 "
     vim.g.dashboard_default_executive = "telescope"
 
     vim.g.dashboard_custom_header = {
- [[                               sexsexsexsexsexse                 ]],
- [[                             sexsesexsexsexsexsexs               ]],
- [[                            sexsexsexsexsexsexsexse              ]],
- [[                          sexsexsexsexsexsexsexsexsex            ]],
- [[                        sexsexsexsexsexsexsexsexsexsex           ]],
- [[                       sexsexsexsexsexsexsexsexsexsexs           ]],
- [[                      sexsexsexsexsexsexsexsexsexsexsex          ]],
- [[                     sexsexsexsexsexsexsexsexsexsexsexse         ]],
- [[                    sexsexsexsexsexsexsexsexsexsexsexsex         ]],
- [[                    exsexsexsexsexsexsexsex  sexsexsexsex        ]],
- [[                   sexsexsexsexsexsexsexs     sexsexsexse        ]],
- [[                   sexsexsexsexsexsexsex        sexsexsex        ]],
- [[                   sexsexsexsexsexsex            sexsexsx        ]],
- [[                   sexsexsexsexsexx              sexsexs x       ]],
- [[                   sexsexsexsexsex-****.    .***-sexsexs sexs    ]],
- [[                   sexsexsexsexsex               sexsex sexsexs  ]],
- [[                   sexsexsexsexsex              sexsex sexsexsexs]],
- [[                   sexsexsexsexsex              sexse sexsexsexse]],
- [[                   sesexsexsexsexs   --sexsex- sexse sexsexsexse ]],
- [[                   xsexsexsexsexse      sexs  sexse sexsexsexs   ]],
- [[                  sexsexsexsexsexse         sexse sexsexsexse    ]],
- [[                sexsexsexsexsexsexs       sexse    sexsexse      ]],
- [[               sexsexse      sexsexs      ixx       sexse        ]],
- [[               sexsex         sexsexs     i         sex          ]],
- [[               sexs            sexsexs    i         x            ]],
- [[               sex              sexsex        x   x              ]],
- [[                x               sexsex        x  x               ]],
- [[               x                sexse          xx                ]],
- [[             sex                sex                x             ]],
- [[           sexsexs             xx                     x          ]],
- [[          sexsexsex    x x                  x           x        ]],
- [[        sexsexsexsexse                       x          (o       ]],
- [[      sexsexsexsexse       x                            x        ]],
- [[    sexsexsexsexse   x     x         (o)      x        x         ]],
- [[  sexsexsexsexse     x      x                 x       x          ]],
- [[ sexsexsexsex        x       x               x      x            ]],
- [[sexsexsexsex          x        x             x    xx             ]],
- [[sexsexsexse           x         x          x      x              ]],
- [[sexsexsexse           x           x x  x         x               ]],
+        [[                _      _                 ]],
+        [[               / \    (_)   ___    ___   ]],
+        [[              / _ \   | |  / __|  / _ \  ]],
+        [[             / ___ \  | | | (__  | (_) | ]],
+        [[            /_/   \_\ |_|  \___|  \___/  ]],
     }
 
     vim.g.dashboard_custom_section = {
@@ -151,44 +117,33 @@ local dashboard_config = function()
     }
 end
 
-local clipboard_settings = function()
-    vim.cmd [[
-    let g:clipboard = {
-          \   'name': 'win32yank-wsl',
-          \   'copy': {
-          \      '+': 'win32yank.exe -i --crlf',
-          \      '*': 'win32yank.exe -i --crlf',
-          \    },
-          \   'paste': {
-          \      '+': 'win32yank.exe -o --lf',
-          \      '*': 'win32yank.exe -o --lf',
-          \   },
-          \   'cache_enabled': 0,
-          \ }
-
-    ]]
-end
-
 local load_core = function()
     local pack = require("core.pack")
     createdir()
     disable_distribution_plugins()
+    --: 重定义<leader>的映射
     leader_map()
 
+    --: 确保module下的所有插件都存在
     pack.ensure_plugins()
-    neovide_config()
-    dashboard_config()
-    -- clipboard_settings()
 
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.cmd [[colorscheme gruvbox]]
+    --: 非常魔幻的界面，性能很差，不建议开启
+    -- neovide_config()
+
+    --: 面板设置(纯属为了好看)
+    dashboard_config()
+
+    --: 配置vim环境属性(相当于运行vimscript中set命令)
     require("core.options")
+    --: 配置与插件无关的快捷键
     require("core.mapping")
+    --: 配置插件的快捷键，自动加载keymap目录下的init.lua文件
     require("keymap")
+    --: 加载时间，即发生什么事件时做什么事情
     require("core.event")
     pack.load_compile()
 
-    -- vim.cmd [[colorscheme morhetz]]
 end
 
+-- 程序的入口
 load_core()

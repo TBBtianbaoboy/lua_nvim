@@ -70,7 +70,8 @@ function autocmd.load_autocmds()
             },
             {
                 "FileType", "c,cpp",
-                "nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>"
+                -- <leader>p 垂直分屏打开头文件或源文件
+                "nnoremap <leader>p :ClangdSwitchSourceHeaderVSplit<CR>"
             }
         },
         yank = {

@@ -33,10 +33,12 @@ function Packer:load_plugins()
 end
 
 function Packer:load_packer()
+    -- 加载packer.nvim
     if not packer then
         api.nvim_command("packadd packer.nvim")
         packer = require("packer")
     end
+    -- 初始化packer.nvim
     packer.init({
         compile_path = packer_compiled,
         git = {clone_timeout = 120},
@@ -50,21 +52,30 @@ function Packer:load_packer()
     })
     packer.reset()
     local use = packer.use
+    -- 加载插件
     self:load_plugins()
     use {"wbthomason/packer.nvim", opt = true}
     for _, repo in ipairs(self.repos) do use(repo) end
 end
 
+-- 插件管理的入口
 function Packer:init_ensure_plugins()
     local packer_dir = data_dir .. "pack/packer/opt/packer.nvim"
+    -- 检测packer.nvim文件是否存在
+    -- packer.nvim是插件包的管理器
     local state = uv.fs_stat(packer_dir)
     if not state then
         local cmd = "!git clone https://github.com/wbthomason/packer.nvim " ..
                         packer_dir
+        -- 如果packer.nvim不存在，则下载
         api.nvim_command(cmd)
-        uv.fs_mkdir(data_dir .. "lua", 511,
-                    function() assert("make compile path dir faield") end)
+        -- 新建编译目录
+        uv.fs_mkdir(data_dir .. "lua", 511, function()
+            assert("make compile path dir faield")
+        end)
+        -- 加载
         self:load_packer()
+        -- 安装插件
         packer.install()
     end
 end

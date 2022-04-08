@@ -15,11 +15,13 @@ function rhs_options:new()
     return instance
 end
 
+-- 运行快捷键
 function rhs_options:map_cmd(cmd_string)
     self.cmd = cmd_string
     return self
 end
 
+-- 运行nvim命令行
 function rhs_options:map_cr(cmd_string)
     self.cmd = (":%s<CR>"):format(cmd_string)
     return self

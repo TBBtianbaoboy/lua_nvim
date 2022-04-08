@@ -19,6 +19,12 @@ ui["morhetz/gruvbox"] = {
     as = "morhetz",
     config = conf.gruvbox
 }
+
+-- @func: vim主题
+-- @keymap: nil
+-- @status: true
+ui["rebelot/kanagawa.nvim"] = { opt = false, config = conf.kanagawa }
+
 -- @func: 下方状态栏
 -- @keymap: nil
 -- @status: true

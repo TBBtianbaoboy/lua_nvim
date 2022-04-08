@@ -22,7 +22,7 @@ lsp_installer.settings {
     }
 }
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem.documentationFormat = {
     "markdown", "plaintext"
@@ -76,6 +76,7 @@ local function custom_attach(client)
     end
 end
 
+-- 专用于C++打开指定的头文件
 local function switch_source_header_splitcmd(bufnr, splitcmd)
     bufnr = nvim_lsp.util.validate_bufnr(bufnr)
     local params = {uri = vim.uri_from_bufnr(bufnr)}
@@ -106,37 +107,25 @@ local enhance_server_opts = {
                 telemetry = {enable = false}
             }
         }
-        opts.on_attach = function(client)
-            client.resolved_capabilities.document_formatting = true
-            custom_attach(client)
-        end
+        -- opts.on_attach = function(client)
+        --     client.resolved_capabilities.document_formatting = true
+        --     custom_attach(client)
+        -- end
     end,
     ["clangd"] = function(opts)
         opts.args = {
             "--background-index", "-std=c++20", "--pch-storage=memory",
             "--clang-tidy", "--suggest-missing-includes"
         }
-        opts.capabilities.offsetEncoding = {"utf-16"}
+        opts.capabilities.offsetEncoding = { "utf-16" }
         opts.single_file_support = true
         opts.commands = {
-            ClangdSwitchSourceHeader = {
-                function()
-                    switch_source_header_splitcmd(0, "edit")
-                end,
-                description = "Open source/header in current buffer"
-            },
             ClangdSwitchSourceHeaderVSplit = {
                 function()
                     switch_source_header_splitcmd(0, "vsplit")
                 end,
                 description = "Open source/header in a new vsplit"
             },
-            ClangdSwitchSourceHeaderSplit = {
-                function()
-                    switch_source_header_splitcmd(0, "split")
-                end,
-                description = "Open source/header in a new split"
-            }
         }
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = true
@@ -186,6 +175,7 @@ local enhance_server_opts = {
             }
         }
         end,
+    -- 保存时可以自动格式化
     ["tsserver"] = function(opts)
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = true
@@ -232,20 +222,22 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
-nvim_lsp.html.setup {
-    cmd = {"html-languageserver", "--stdio"},
-    filetypes = {"html"},
-    init_options = {
-        configurationSection = {"html", "css", "javascript"},
-        embeddedLanguages = {css = true, javascript = true}
-    },
-    settings = {},
-    single_file_support = true,
-    flags = {debounce_text_changes = 500},
-    capabilities = capabilities,
-    on_attach = custom_attach
-}
+-- html 配置(无用)
+-- nvim_lsp.html.setup {
+--     cmd = {"html-languageserver", "--stdio"},
+--     filetypes = {"html"},
+--     init_options = {
+--         configurationSection = {"html", "css", "javascript"},
+--         embeddedLanguages = {css = true, javascript = true}
+--     },
+--     settings = {},
+--     single_file_support = true,
+--     flags = {debounce_text_changes = 500},
+--     capabilities = capabilities,
+--     on_attach = custom_attach
+-- }
 
+-- efm (无用)
 -- local efmls = require("efmls-configs")
 --
 -- -- Init `efm-langserver` here.

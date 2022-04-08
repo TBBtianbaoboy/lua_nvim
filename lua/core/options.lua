@@ -1,15 +1,10 @@
--- 配置vim属性的配置文件
+-- 配置vim环境属性的配置文件
 local global = require("core.global")
 
 local function bind_option(options)
+    local set = vim.opt
     for k, v in pairs(options) do
-        if v == true then
-            vim.cmd("set " .. k)
-        elseif v == false then
-            vim.cmd("set no" .. k)
-        else
-            vim.cmd("set " .. k .. "=" .. v)
-        end
+        set[k] = v
     end
 end
 
@@ -117,6 +112,7 @@ local function load_options()
         concealcursor = "niv"
     }
 
+    -- mac是操作系统时自动开启操作系统时可以开启
     if global.is_mac then
         vim.g.clipboard = {
             name = "macOS-clipboard",
@@ -127,6 +123,7 @@ local function load_options()
         vim.g.python_host_prog = "/usr/bin/python"
         vim.g.python3_host_prog = "/usr/local/bin/python3"
     end
+
     for name, value in pairs(global_local) do vim.o[name] = value end
     bind_option(bw_local)
 end

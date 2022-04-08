@@ -94,10 +94,19 @@ editor["SmiteshP/nvim-gps"] = {
 editor["windwp/nvim-ts-autotag"] = {
     opt = true,
     ft = {
-        'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript',
+        'html',
         'xml',
-        'php',
-        'markdown',
+        -- 'javascript',
+        -- 'typescript',
+        -- 'javascriptreact',
+        -- 'typescriptreact',
+        -- 'svelte',
+        -- 'vue',
+        -- 'tsx',
+        -- 'jsx',
+        -- 'rescript',
+        -- 'php',
+        -- 'markdown',
     },
     config = conf.autotag
 }
@@ -298,4 +307,11 @@ editor["tpope/vim-fugitive"] = {opt = true, cmd = {"Git", "G"}}
     -- config = conf.specs
 -- }
 
+-- @func: git 代码比较(非常好用)
+-- @keymap: wait to learn
+-- @status: true
+editor["sindrets/diffview.nvim"] = {
+	opt = true,
+	cmd = { "DiffviewOpen" },
+}
 return editor

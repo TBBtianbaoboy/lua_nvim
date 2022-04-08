@@ -3,7 +3,7 @@ local conf = require("modules.completion.config")
 
 -- Neovim native LSP configuration
 completion["neovim/nvim-lspconfig"] = {
-            opt = true,
+    opt = true,
     event = "BufReadPre",
     config = conf.nvim_lsp
 }
@@ -15,12 +15,23 @@ completion["williamboman/nvim-lsp-installer"] = {
     after = "nvim-lspconfig"
 }
 
+-- @func: lsp 跳转优化
+-- @keymap: gr gd ... | <C-v>垂直分页显示
+-- @status: true
+completion["RishabhRD/nvim-lsputils"] = {
+	opt = true,
+	after = "nvim-lspconfig",
+    requires = {
+        {"RishabhRD/popfix"},
+    },
+	config = conf.nvim_lsputils,
+}
+
 -- @func: efm语言格式化配置
 -- @keymap: : nil
 -- @status: false
 -- completion["creativenull/efmls-configs-nvim"] = {
---     opt = true,
---     event = {"BufWritePre"},
+--     opt = false,
 --     requires = "neovim/nvim-lspconfig"
 -- }
 
@@ -29,7 +40,7 @@ completion["williamboman/nvim-lsp-installer"] = {
 -- @status: true
 completion["ray-x/lsp_signature.nvim"] = {opt = true, after = "nvim-lspconfig"}
 
--- @func: 代码参数提示
+-- @func: 代码自动补全
 -- @keymap: : nil
 -- @status: true
 completion["hrsh7th/nvim-cmp"] = {

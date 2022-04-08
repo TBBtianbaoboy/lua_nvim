@@ -24,7 +24,7 @@ tools["dstein64/vim-startuptime"] = {opt = true, cmd = "StartupTime"}
 
 -- @func: 代码格式化
 -- @keymap: : nil
--- @status: false
+-- @status: false(不好用)
 -- tools["mhartington/formatter.nvim"] = {
 --     opt = true,
 --     cmd = {"Format","FormatWrite"},
