@@ -71,6 +71,7 @@ local function load_options()
         cursorline = true, --高亮显示当前行
         cursorcolumn = false, --高亮显示当前列
         list = true,
+        dictionary = "/usr/share/dict/words", -- set english word dictionary   <C-X><C-K>
         showtabline = 2,
         winwidth = 30,
         winminwidth = 10,

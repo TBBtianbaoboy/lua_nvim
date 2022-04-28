@@ -314,4 +314,32 @@ editor["sindrets/diffview.nvim"] = {
 	opt = true,
 	cmd = { "DiffviewOpen" },
 }
+
+-- @func: do mark on line
+-- @keymap: m[x] | dm[x] | m] | m[ | dm<space> | <C-m>
+-- @status: true
+editor["chentau/marks.nvim"] = {
+	opt = true,
+    event = "BufReadPre",
+    config = conf.marks,
+}
+
+-- @func: make notes
+-- @keymap: :Notes
+-- @status: true
+editor["xolox/vim-notes"] = {
+	opt = false,
+    config = conf.notes,
+    requires = {
+        {"xolox/vim-misc"},
+    }
+}
+
+-- editor["skywind3000/vim-auto-popmenu"] = {
+-- 	opt = false,
+--     config = conf.popmenu,
+--     requires = {
+--         {"skywind3000/vim-dict"}
+--     }
+-- }
 return editor

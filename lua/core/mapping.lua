@@ -4,6 +4,11 @@ local map_cmd = bind.map_cmd
 
 -- default map
 local def_map = {
+    -- mark do | undo dm0
+    ["n|<C-m>"] = map_cmd("m0");
+    ["n|<A-m>"] = map_cmd("dm=");
+    -- dictionary auto complete
+    ["i|<C-n>"] = map_cmd("<C-x><C-k>"),
     -- Vim map
     ["n|Y"] = map_cmd("y$"),
     ["n|D"] = map_cmd("d$"),
@@ -68,8 +73,18 @@ local def_map = {
     ["c|<Down>"] = map_cmd("<Nop>"),
     ["c|<Left>"] = map_cmd("<Nop>"),
     ["c|<Right>"] = map_cmd("<Nop>"),
+    -- 摈弃其他快捷键
+    ["n|<F1>"] = map_cmd("<Nop>"):with_noremap(),
+    ["n|Q"] = map_cmd("<Nop>"):with_noremap(),
+    ["i|<F1>"] = map_cmd("<Nop>"):with_noremap(),
     -- 将<space>映射成<leader>
-    ["n|<Space>"] = map_cmd(";")
+    ["n|<Space>"] = map_cmd(";"),
+    -- 跳转居中
+    ["n|<C-o>"] = map_cmd("<C-o>zz"):with_noremap(),
+    ["n|<C-i>"] = map_cmd("<C-i>zz"):with_noremap(),
+    ["n|<C-[>"] = map_cmd("<C-[>zz"):with_noremap(),
+    -- 代码跳转修正
+    ["n|gd"] = map_cmd("gdzz"):with_noremap(),
 }
 
 bind.nvim_load_mapping(def_map)

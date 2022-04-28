@@ -33,6 +33,7 @@ function autocmd.load_autocmds()
             {"BufEnter", "*", "silent! lcd %:p:h"}, -- auto place to last edit
             {
                 "BufReadPost", "*",
+                -- 打开文件自动定位到最后编辑的位置
                 [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
             } -- Auto toggle fcitx5
             -- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},

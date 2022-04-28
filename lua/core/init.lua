@@ -78,40 +78,55 @@ local dashboard_config = function()
     vim.g.dashboard_default_executive = "telescope"
 
     vim.g.dashboard_custom_header = {
-        [[                _      _                 ]],
-        [[               / \    (_)   ___    ___   ]],
-        [[              / _ \   | |  / __|  / _ \  ]],
-        [[             / ___ \  | | | (__  | (_) | ]],
-        [[            /_/   \_\ |_|  \___|  \___/  ]],
+        [[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]],
+        [[░░░▄▄▄▄▄▄░░░░▄▄▄░░░░▄▄▄░░░░░░]],
+        [[░░░▀████▀░░▄█████▄▄█████▄░░░░]],
+        [[░░░░░██░░░████████████████░░░]],
+        [[░░░░░██░░░████████████████░░░]],
+        [[░░░░░██░░░▀██████████████▀░░░]],
+        [[░░░░▄██▄░░░░▀██████████▀░░░░░]],
+        [[░░░██████░░░░░▀██████▀░░░░░░░]],
+        [[░░░░░░░░░░░░░░░░▀██▀░░░░░░░░░]],
+        [[░░░░░░░░░░░░░▄▄░░░░░░░░░░░░░░]],
+        [[░░▀███░███▀▄█▀▀█▄░▀██▀░▀██▀░░]],
+        [[░░░░▀█▄█▀░▄█░░░░█▄░██░░░██░░░]],
+        [[░░░░░░█░░░██░░░░██░██░░░██░░░]],
+        [[░░░░░░█░░░░█▄░░▄█░░██░░░██░░░]],
+        [[░░░░▄███▄░░░▀██▀░░░░▀███▀░░░░]],
+        [[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]],
+        [[   / \    (_)   ___    ___   ]],
+        [[  / _ \   | |  / __|  / _ \  ]],
+        [[ / ___ \  | | | (__  | (_) | ]],
+        [[/_/   \_\ |_|  \___|  \___/  ]],
     }
 
     vim.g.dashboard_custom_section = {
         change_colorscheme = {
-            description = {" Scheme change              <space> c c "},
+            description = {" Scheme change              <Leader> c c "},
             command = "DashboardChangeColorscheme"
         },
         find_frecency = {
-            description = {" File frecency              <space> f r "},
+            description = {" File frecency              <Leader> f r "},
             command = "Telescope frecency"
         },
         find_history = {
-            description = {" File history               <space> f e "},
+            description = {" File history               <Leader> f e "},
             command = "DashboardFindHistory"
         },
         find_project = {
-            description = {" Project find               <space> f p "},
+            description = {" Project find               <Leader> f p "},
             command = "Telescope project"
         },
         find_file = {
-            description = {" File find                  <space> f f "},
+            description = {" File find                  <Leader> f f "},
             command = "DashboardFindFile"
         },
         file_new = {
-            description = {" File new                   <space> f n "},
+            description = {" File new                   <Leader> f n "},
             command = "DashboardNewFile"
         },
         find_word = {
-            description = {" Word find                  <space> f w "},
+            description = {" Word find                  <Leader> f w "},
             command = "DashboardFindWord"
         }
     }
