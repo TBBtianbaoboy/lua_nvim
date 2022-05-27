@@ -10,14 +10,14 @@ local conf = require("modules.editor.config")
 -- @func: 自动对齐
 -- @keymap: ga
 -- @status: true
-editor["junegunn/vim-easy-align"] = {opt = true, cmd = "EasyAlign"}
+editor["junegunn/vim-easy-align"] = { opt = true, cmd = "EasyAlign" }
 
 -- @func: 给光标所在的所有相同单词增加下划线
 -- @keymap: nil
 -- @status: true
 editor["itchyny/vim-cursorword"] = {
     opt = true,
-    event = {"BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
     config = conf.vim_cursorwod,
 }
 
@@ -40,7 +40,7 @@ editor["terrortylor/nvim-comment"] = {
 -- @status: true
 editor["simrat39/symbols-outline.nvim"] = {
     opt = true,
-    cmd = {"SymbolsOutline", "SymbolsOutlineOpen"},
+    cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
     config = conf.symbols_outline
 }
 
@@ -96,17 +96,17 @@ editor["windwp/nvim-ts-autotag"] = {
     ft = {
         'html',
         'xml',
-        -- 'javascript',
-        -- 'typescript',
-        -- 'javascriptreact',
-        -- 'typescriptreact',
-        -- 'svelte',
-        -- 'vue',
-        -- 'tsx',
-        -- 'jsx',
-        -- 'rescript',
-        -- 'php',
-        -- 'markdown',
+        'javascript',
+        'typescript',
+        'javascriptreact',
+        'typescriptreact',
+        'svelte',
+        'vue',
+        'tsx',
+        'jsx',
+        'rescript',
+        'php',
+        'markdown',
     },
     config = conf.autotag
 }
@@ -123,19 +123,19 @@ editor["andymass/vim-matchup"] = {
 -- @func: 加速j/k移动的速度
 -- @keymap: j k
 -- @status: true
-editor["rhysd/accelerated-jk"] = {opt = true}
+editor["rhysd/accelerated-jk"] = { opt = true }
 
 -- @func: 高亮f/t跳转的位置
 -- @keymap: f t F T
 -- @status: true
-editor["hrsh7th/vim-eft"] = {opt = true}
+editor["hrsh7th/vim-eft"] = { opt = true }
 
 -- @func: 使用删除键取消搜索高亮时，可以再次搜索，且自动不高亮
 -- @keymap: n N
 -- @status: true
 editor["romainl/vim-cool"] = {
     opt = true,
-    event = {"CursorMoved", "InsertEnter"}
+    event = { "CursorMoved", "InsertEnter" }
 }
 
 -- @func: 热词跳转，可以跳转到任何想要跳到的地方
@@ -149,7 +149,7 @@ editor["phaazon/hop.nvim"] = {
         "HopChar2"
     },
     config = function()
-        require("hop").setup {keys = "etovxqpdygfblzhckisuran"}
+        require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
     end
 }
 
@@ -174,7 +174,7 @@ editor["akinsho/nvim-toggleterm.lua"] = {
 -- @func: 未知
 -- @keymap: <A-d>
 -- @status: false
-editor["numtostr/FTerm.nvim"] = {opt = true, event = "BufRead"}
+editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }
 
 -- @func: 给#ffffff配上颜色
 -- @keymap: nil
@@ -190,7 +190,7 @@ editor["norcalli/nvim-colorizer.lua"] = {
 -- @status: true
 editor["rmagatti/auto-session"] = {
     opt = true,
-    cmd = {"SaveSession", "RestoreSession", "DeleteSession"},
+    cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
     config = conf.auto_session
 }
 
@@ -200,7 +200,7 @@ editor["rmagatti/auto-session"] = {
 editor["folke/zen-mode.nvim"] = {
     opt = true,
     event = "BufRead",
-    cmd = {"ZenMode"},
+    cmd = { "ZenMode" },
     config = conf.zen_mode
 }
 
@@ -239,7 +239,7 @@ editor["AndrewRadev/splitjoin.vim"] = {
 -- @status: true
 editor["nacro90/numb.nvim"] = {
     opt = true,
-    event = {"CmdlineEnter"},
+    event = { "CmdlineEnter" },
     config = conf.numb
 }
 
@@ -248,7 +248,7 @@ editor["nacro90/numb.nvim"] = {
 -- @status: true
 editor["McAuleyPenney/tidy.nvim"] = {
     opt = true,
-    event = {"BufWritePre"},
+    event = { "BufWritePre" },
 }
 
 -- @func: 给变量重新命名，lsp rename的扩展
@@ -259,7 +259,7 @@ editor["filipdutescu/renamer.nvim"] = {
     event = "BufRead",
     branch = "master",
     requires = {
-        {"nvim-lua/plenary.nvim"},
+        { "nvim-lua/plenary.nvim" },
     },
     config = conf.renamer
 }
@@ -284,10 +284,10 @@ editor["rcarriga/nvim-dap-ui"] = {
     opt = false,
     config = conf.dapui,
     requires = {
-        {"mfussenegger/nvim-dap", config = conf.dap}, {
+        { "mfussenegger/nvim-dap", config = conf.dap }, {
             "Pocco81/DAPInstall.nvim",
             opt = true,
-            cmd = {"DIInstall", "DIUninstall", "DIList"},
+            cmd = { "DIInstall", "DIUninstall", "DIList" },
             config = conf.dapinstall
         }
     }
@@ -296,7 +296,7 @@ editor["rcarriga/nvim-dap-ui"] = {
 -- @func: 未知
 -- @keymap: unknow
 -- @status: false
-editor["tpope/vim-fugitive"] = {opt = true, cmd = {"Git", "G"}}
+editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 
 -- @func: 使光标跳转会显示闪动
 -- @keymap: nil
@@ -304,42 +304,34 @@ editor["tpope/vim-fugitive"] = {opt = true, cmd = {"Git", "G"}}
 -- editor["edluffy/specs.nvim"] = {
 --     opt = true,
 --     event = "CursorMoved",
-    -- config = conf.specs
+-- config = conf.specs
 -- }
 
 -- @func: git 代码比较(非常好用)
 -- @keymap: wait to learn
 -- @status: true
 editor["sindrets/diffview.nvim"] = {
-	opt = true,
-	cmd = { "DiffviewOpen" },
-}
-
--- @func: do mark on line
--- @keymap: m[x] | dm[x] | m] | m[ | dm<space> | <C-m>
--- @status: true
-editor["chentau/marks.nvim"] = {
-	opt = true,
-    event = "BufReadPre",
-    config = conf.marks,
+    opt = true,
+    cmd = { "DiffviewOpen" },
 }
 
 -- @func: make notes
 -- @keymap: :Notes
 -- @status: true
 editor["xolox/vim-notes"] = {
-	opt = false,
+    opt = false,
     config = conf.notes,
     requires = {
-        {"xolox/vim-misc"},
+        { "xolox/vim-misc" },
     }
 }
 
--- editor["skywind3000/vim-auto-popmenu"] = {
--- 	opt = false,
---     config = conf.popmenu,
---     requires = {
---         {"skywind3000/vim-dict"}
---     }
--- }
+-- @func: AI complete
+-- @keymap: : <C-x>
+-- @status: true
+editor["github/copilot.vim"] = {
+    opt = false,
+    config = conf.copilot
+}
+
 return editor

@@ -4,9 +4,6 @@ local map_cmd = bind.map_cmd
 
 -- default map
 local def_map = {
-    -- mark do | undo dm0
-    ["n|<C-m>"] = map_cmd("m0");
-    ["n|<A-m>"] = map_cmd("dm=");
     -- dictionary auto complete
     ["i|<C-n>"] = map_cmd("<C-x><C-k>"),
     -- Vim map
@@ -18,11 +15,11 @@ local def_map = {
     ["n|N"] = map_cmd("Nzzzv"):with_noremap(),
     ["n|J"] = map_cmd("mzJ`z"):with_noremap(), -- 将下一行移动到当前行尾
     -- Windows Split
-    ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),-- C 表示Ctrl键
+    ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(), -- C 表示Ctrl键
     ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
     ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
     ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
-    ["n|<A-;>"] = map_cr("resize -2"):with_silent(),-- A 表示Alt键
+    ["n|<A-;>"] = map_cr("resize -2"):with_silent(), -- A 表示Alt键
     ["n|<A-'>"] = map_cr("resize +2"):with_silent(),
     ["n|<leader>e"] = map_cmd(":wq<CR>"),
     ["n|<leader>q"] = map_cmd(":q!<CR>"),
@@ -33,7 +30,7 @@ local def_map = {
     ["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap(), -- 删除当行光标前内容
     ["i|<C-b>"] = map_cmd("<Left>"):with_noremap(), -- 光标向行首移动
     ["i|<C-a>"] = map_cmd("<Esc>^i"):with_noremap(), -- 光标跳转到行首
-    ["i|<C-e>"] = map_cmd("<End>"):with_noremap(), -- 光标跳转到行尾
+    ["i|<C-r>"] = map_cmd("<End>"):with_noremap(), -- 光标跳转到行尾
     ["i|<C-f>"] = map_cmd("<Right>"):with_noremap(), -- 光标向行尾移动
     ["i|<C-d>"] = map_cmd("<Del>"):with_noremap(), -- 光标向后删除-- 另外<C-h> 是光标向前删除
     ["i|<C-k>"] = map_cmd("()<Esc>i"):with_noremap(), -- 增加()

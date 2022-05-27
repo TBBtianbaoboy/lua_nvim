@@ -23,32 +23,32 @@ function config.symbols_outline()
         },
         lsp_blacklist = {},
         symbols = {
-            File = {icon = "", hl = "TSURI"},
-            Module = {icon = "", hl = "TSNamespace"},
-            Namespace = {icon = "", hl = "TSNamespace"},
-            Package = {icon = "", hl = "TSNamespace"},
-            Class = {icon = "𝓒", hl = "TSType"},
-            Method = {icon = "ƒ", hl = "TSMethod"},
-            Property = {icon = "", hl = "TSMethod"},
-            Field = {icon = "", hl = "TSField"},
-            Constructor = {icon = "", hl = "TSConstructor"},
-            Enum = {icon = "ℰ", hl = "TSType"},
-            Interface = {icon = "ﰮ", hl = "TSType"},
-            Function = {icon = "", hl = "TSFunction"},
-            Variable = {icon = "", hl = "TSConstant"},
-            Constant = {icon = "", hl = "TSConstant"},
-            String = {icon = "𝓐", hl = "TSString"},
-            Number = {icon = "#", hl = "TSNumber"},
-            Boolean = {icon = "⊨", hl = "TSBoolean"},
-            Array = {icon = "", hl = "TSConstant"},
-            Object = {icon = "⦿", hl = "TSType"},
-            Key = {icon = "🔐", hl = "TSType"},
-            Null = {icon = "NULL", hl = "TSType"},
-            EnumMember = {icon = "", hl = "TSField"},
-            Struct = {icon = "𝓢", hl = "TSType"},
-            Event = {icon = "🗲", hl = "TSType"},
-            Operator = {icon = "+", hl = "TSOperator"},
-            TypeParameter = {icon = "𝙏", hl = "TSParameter"}
+            File = { icon = "", hl = "TSURI" },
+            Module = { icon = "", hl = "TSNamespace" },
+            Namespace = { icon = "", hl = "TSNamespace" },
+            Package = { icon = "", hl = "TSNamespace" },
+            Class = { icon = "𝓒", hl = "TSType" },
+            Method = { icon = "ƒ", hl = "TSMethod" },
+            Property = { icon = "", hl = "TSMethod" },
+            Field = { icon = "", hl = "TSField" },
+            Constructor = { icon = "", hl = "TSConstructor" },
+            Enum = { icon = "ℰ", hl = "TSType" },
+            Interface = { icon = "ﰮ", hl = "TSType" },
+            Function = { icon = "", hl = "TSFunction" },
+            Variable = { icon = "", hl = "TSConstant" },
+            Constant = { icon = "", hl = "TSConstant" },
+            String = { icon = "𝓐", hl = "TSString" },
+            Number = { icon = "#", hl = "TSNumber" },
+            Boolean = { icon = "⊨", hl = "TSBoolean" },
+            Array = { icon = "", hl = "TSConstant" },
+            Object = { icon = "⦿", hl = "TSType" },
+            Key = { icon = "🔐", hl = "TSType" },
+            Null = { icon = "NULL", hl = "TSType" },
+            EnumMember = { icon = "", hl = "TSField" },
+            Struct = { icon = "𝓢", hl = "TSType" },
+            Event = { icon = "🗲", hl = "TSType" },
+            Operator = { icon = "+", hl = "TSOperator" },
+            TypeParameter = { icon = "𝙏", hl = "TSParameter" }
         }
     })
 end
@@ -69,13 +69,15 @@ function config.nvim_treesitter()
     vim.api.nvim_command("set foldmethod=expr")
     vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
 
-    require"nvim-treesitter.configs".setup {
-        -- ensure_installed = "maintained",
-        ensure_installed = "all",
+    require "nvim-treesitter.configs".setup {
+        indent = {
+            enable = true
+        },
+        ensure_installed = { "c", "lua", "json", "cpp", "go", "typescript" },
         highlight = {
             enable = true,
-            disable = {"vim","org"},
-            additional_vim_regex_highlighting = {'org'},
+            -- make this true can revise treesitter highlight invalid
+            additional_vim_regex_highlighting = true,
         },
         -- label 1
         textobjects = {
@@ -111,17 +113,14 @@ function config.nvim_treesitter()
         },
         -- label 2
         rainbow = {
-            -- colors={
-            --     "#123456",
-            -- },
             enable = true,
             extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
             max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
         },
         -- label 3
-        context_commentstring = {enable = true, enable_autocmd = false},
+        context_commentstring = { enable = true, enable_autocmd = false },
         -- label 4
-        matchup = {enable = true},
+        matchup = { enable = true },
     }
 end
 
@@ -228,7 +227,7 @@ function config.vim_expand_region()
 end
 
 function config.numb()
-    require('numb').setup{
+    require('numb').setup {
         show_numbers = true, -- Enable 'number' for the window while peeking
         show_cursorline = true, -- Enable 'cursorline' for the window while peeking
         number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
@@ -334,41 +333,6 @@ function config.notes()
     vim.cmd [[ let g:notes_directories = ['~/Documents/Notes', '~/Dropbox/Shared Notes'] ]]
 end
 
-function config.marks()
-    require'marks'.setup {
-        -- whether to map keybinds or not. default true
-        default_mappings = true,
-        -- which builtin marks to show. default {}
-        builtin_marks = { "😀" },
-        -- whether movements cycle back to the beginning/end of buffer. default true
-        cyclic = true,
-        -- whether the shada file is updated after modifying uppercase marks. default false
-        force_write_shada = false,
-        -- how often (in ms) to redraw signs/recompute mark positions.
-        -- higher values will have better performance but may cause visual lag,
-        -- while lower values may cause performance penalties. default 150.
-        refresh_interval = 250,
-        -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-        -- marks, and bookmarks.
-        -- can be either a table with all/none of the keys, or a single number, in which case
-        -- the priority applies to all marks.
-        -- default 10.
-        sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-        -- disables mark tracking for specific filetypes. default {}
-        excluded_filetypes = {},
-        -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
-        -- sign/virttext. Bookmarks can be used to group together positions and quickly move
-        -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
-        -- default virt_text is "".
-        bookmark_0 = {
-            sign = "🚩",
-            virt_text = "▁▂▃▅▆█ Aico -> 🍩🆃 🅾 🅳 🅾 🍩 █▆▅▃▂▁"
-        },
-        mappings = {
-        }
-    }
-end
-
 function config.dapui()
     local dap, dapui = require("dap"), require("dapui")
     dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -382,10 +346,10 @@ function config.dapui()
     end
 
     require("dapui").setup({
-        icons = {expanded = "▾", collapsed = "▸"},
+        icons = { expanded = "▾", collapsed = "▸" },
         mappings = {
             -- Use a table to apply multiple mappings
-            expand = {"<CR>", "<2-LeftMouse>"},
+            expand = { "<CR>", "<2-LeftMouse>" },
             open = "o",
             remove = "d",
             edit = "e",
@@ -397,19 +361,19 @@ function config.dapui()
                 {
                     id = "scopes",
                     size = 0.25 -- Can be float or integer > 1
-                }, {id = "breakpoints", size = 0.25},
-                {id = "stacks", size = 0.25}, {id = "watches", size = 00.25}
+                }, { id = "breakpoints", size = 0.25 },
+                { id = "stacks", size = 0.25 }, { id = "watches", size = 00.25 }
             },
             size = 40,
             position = "left"
         },
-        tray = {elements = {"repl"}, size = 10, position = "bottom"},
+        tray = { elements = { "repl" }, size = 10, position = "bottom" },
         floating = {
             max_height = nil,
             max_width = nil,
-            mappings = {close = {"q", "<Esc>"}}
+            mappings = { close = { "q", "<Esc>" } }
         },
-        windows = {indent = 1}
+        windows = { indent = 1 }
     })
 end
 
@@ -422,8 +386,8 @@ function config.dap()
         local pid_or_err
         local port = 38697
         local opts = {
-            stdio = {nil, stdout},
-            args = {"dap", "-l", "127.0.0.1:" .. port},
+            stdio = { nil, stdout },
+            args = { "dap", "-l", "127.0.0.1:" .. port },
             detached = true
         }
         handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
@@ -442,12 +406,12 @@ function config.dap()
         end)
         -- Wait for delve to start
         vim.defer_fn(function()
-            callback({type = "server", host = "127.0.0.1", port = port})
+            callback({ type = "server", host = "127.0.0.1", port = port })
         end, 100)
     end
     -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
     dap.configurations.go = {
-        {type = "go", name = "Debug", request = "launch", program = "${file}"},
+        { type = "go", name = "Debug", request = "launch", program = "${file}" },
         {
             type = "go",
             name = "Debug test", -- configuration for debugging test files
@@ -468,7 +432,7 @@ function config.dap()
         type = "executable",
         command = os.getenv("HOME") ..
             "/.local/share/nvim/dapinstall/python_dbg/bin/python",
-        args = {"-m", "debugpy.adapter"}
+        args = { "-m", "debugpy.adapter" }
     }
     dap.configurations.python = {
         {
@@ -520,5 +484,10 @@ end
 --         ignore_buftypes = {nofile = true}
 --     }
 -- end
+
+function config.copilot()
+    vim.cmd [[imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")]]
+    vim.cmd [[let g:copilot_no_tab_map = v:true]]
+end
 
 return config

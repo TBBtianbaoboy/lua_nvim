@@ -16,11 +16,13 @@ local function load_options()
         visualbell = true,
         hidden = true,
         fileformats = "unix,mac,dos",
+        fileencoding = "utf-8",
         magic = true,
         virtualedit = "block",
         encoding = "utf-8",
         viewoptions = "folds,cursor,curdir,slash,unix",
         sessionoptions = "curdir,help,tabpages,winsize",
+        -- if error! install xclip!
         clipboard = "unnamedplus",
         wildignorecase = true,
         wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
@@ -69,7 +71,7 @@ local function load_options()
         foldlevelstart = 99,
         ruler = true,
         cursorline = true, --高亮显示当前行
-        cursorcolumn = false, --高亮显示当前列
+        cursorcolumn = true, --高亮显示当前列
         list = true,
         dictionary = "/usr/share/dict/words", -- set english word dictionary   <C-X><C-K>
         showtabline = 2,

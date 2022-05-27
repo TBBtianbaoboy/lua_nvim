@@ -22,7 +22,7 @@ lsp_installer.settings {
     }
 }
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem.documentationFormat = {
     "markdown", "plaintext"
@@ -34,27 +34,27 @@ capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
 capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = {
-    valueSet = {1}
+    valueSet = { 1 }
 }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {"documentation", "detail", "additionalTextEdits"}
+    properties = { "documentation", "detail", "additionalTextEdits" }
 }
 
-vim.lsp.handlers["textDocument/formatting"] =
-    function(err, result, ctx)
-        if err ~= nil or result == nil then return end
-        if vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") ==
-            vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick") then
-            local view = vim.fn.winsaveview()
-            vim.lsp.util.apply_text_edits(result, ctx.bufnr)
-            vim.fn.winrestview(view)
-            if ctx.bufnr == vim.api.nvim_get_current_buf() then
-                vim.b.saving_format = true
-                vim.cmd [[update]]
-                vim.b.saving_format = false
-            end
-        end
-    end
+-- this is options.if no error,you can decomment this paragraphy
+-- vim.lsp.handlers["textDocument/formatting"] = function(err, result, ctx)
+--     if err ~= nil or result == nil then return end
+--     if vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") ==
+--         vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick") then
+--         local view = vim.fn.winsaveview()
+--         vim.lsp.util.apply_text_edits(result, ctx.bufnr)
+--         vim.fn.winrestview(view)
+--         if ctx.bufnr == vim.api.nvim_get_current_buf() then
+--             vim.b.saving_format = true
+--             vim.cmd [[update]]
+--             vim.b.saving_format = false
+--         end
+--     end
+-- end
 
 local function custom_attach(client)
     require("lsp_signature").on_attach({
@@ -64,7 +64,7 @@ local function custom_attach(client)
         fix_pos = true,
         hint_enable = true,
         hi_parameter = "Search",
-        handlers = {"rounded"}
+        handlers = { "rounded" }
     })
 
     -- 代码保存自动格式化
@@ -79,23 +79,23 @@ end
 -- 专用于C++打开指定的头文件
 local function switch_source_header_splitcmd(bufnr, splitcmd)
     bufnr = nvim_lsp.util.validate_bufnr(bufnr)
-    local params = {uri = vim.uri_from_bufnr(bufnr)}
+    local params = { uri = vim.uri_from_bufnr(bufnr) }
     vim.lsp.buf_request(bufnr, "textDocument/switchSourceHeader", params,
-                        function(err, result)
-        if err then error(tostring(err)) end
-        if not result then
-            print("Corresponding file can’t be determined")
-            return
-        end
-        vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
-    end)
+        function(err, result)
+            if err then error(tostring(err)) end
+            if not result then
+                print("Corresponding file can’t be determined")
+                return
+            end
+            vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+        end)
 end
 
 local enhance_server_opts = {
     ["sumneko_lua"] = function(opts)
         opts.settings = {
             Lua = {
-                diagnostics = {globals = {"vim", "packer_plugins"}},
+                diagnostics = { globals = { "vim", "packer_plugins" } },
                 workspace = {
                     library = {
                         [vim.fn.expand "$VIMRUNTIME/lua"] = true,
@@ -104,13 +104,13 @@ local enhance_server_opts = {
                     maxPreload = 100000,
                     preloadFileSize = 10000
                 },
-                telemetry = {enable = false}
+                telemetry = { enable = false }
             }
         }
-        -- opts.on_attach = function(client)
-        --     client.resolved_capabilities.document_formatting = true
-        --     custom_attach(client)
-        -- end
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = true
+            custom_attach(client)
+        end
     end,
     ["clangd"] = function(opts)
         opts.args = {
@@ -138,10 +138,10 @@ local enhance_server_opts = {
                 -- Schemas https://www.schemastore.org
                 schemas = {
                     {
-                        fileMatch = {"package.json"},
+                        fileMatch = { "package.json" },
                         url = "https://json.schemastore.org/package.json"
                     }, {
-                        fileMatch = {"tsconfig*.json"},
+                        fileMatch = { "tsconfig*.json" },
                         url = "https://json.schemastore.org/tsconfig.json"
                     }, {
                         fileMatch = {
@@ -150,7 +150,7 @@ local enhance_server_opts = {
                         },
                         url = "https://json.schemastore.org/prettierrc.json"
                     }, {
-                        fileMatch = {".eslintrc", ".eslintrc.json"},
+                        fileMatch = { ".eslintrc", ".eslintrc.json" },
                         url = "https://json.schemastore.org/eslintrc.json"
                     }, {
                         fileMatch = {
@@ -159,7 +159,7 @@ local enhance_server_opts = {
                         url = "https://json.schemastore.org/babelrc.json"
                     },
                     {
-                        fileMatch = {"lerna.json"},
+                        fileMatch = { "lerna.json" },
                         url = "https://json.schemastore.org/lerna.json"
                     }, {
                         fileMatch = {
@@ -168,13 +168,13 @@ local enhance_server_opts = {
                         },
                         url = "http://json.schemastore.org/stylelintrc.json"
                     }, {
-                        fileMatch = {"/.github/workflows/*"},
+                        fileMatch = { "/.github/workflows/*" },
                         url = "https://json.schemastore.org/github-workflow.json"
                     }
                 }
             }
         }
-        end,
+    end,
     -- 保存时可以自动格式化
     ["tsserver"] = function(opts)
         opts.on_attach = function(client)
@@ -211,7 +211,7 @@ local enhance_server_opts = {
 lsp_installer.on_server_ready(function(server)
     local opts = {
         capabilities = capabilities,
-        flags = {debounce_text_changes = 500},
+        flags = { debounce_text_changes = 500 },
         on_attach = custom_attach
     }
 
